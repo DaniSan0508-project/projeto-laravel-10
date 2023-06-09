@@ -5,7 +5,7 @@
         <h1 class="h2">Produtos</h1>
     </div>
 
-    <form action="" method="GET">
+    <form action="{{ route('produto.index') }}" method="GET">
         <div class="input-group mb-3">
             <input type="text" class="form-control" name="pesquisa" placeholder="Digite o termo de pesquisa">
             <div class="input-group-append">
@@ -32,10 +32,19 @@
                         <a class="btn btn-danger btn-sm" onclick="excluirProduto({{ $produto->id }})">Excluir</a>
                     </td>
                   </tr>
-                @endforeach
-                
+                  @endforeach
+                  
               </tbody>
             </table>
-          </div>
+        </div>
+        <div class="pagination">
+            @if ($produtos->currentPage() > 1)
+                <a href="{{ $produtos->previousPageUrl() }}" class="btn btn-primary">Voltar</a>
+            @endif
+            
+            @if ($produtos->currentPage() < $produtos->lastPage())
+                <a href="{{ $produtos->nextPageUrl() }}" class="btn btn-primary">Próxima</a>
+            @endif
+        </div>
     </form>
 @endsection
