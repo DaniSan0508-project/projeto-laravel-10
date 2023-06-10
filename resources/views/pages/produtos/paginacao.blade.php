@@ -30,7 +30,8 @@
                             <td>R$ {{ number_format($produto->valor, 2, ',', '.') }}</td>
                             <td>
                                 <a href="" class="btn btn-light btn-sm">Editar</a>
-                                <a class="btn btn-danger btn-sm" onclick="excluirProduto({{ $produto->id }})">Excluir</a>
+                                <meta name="csrf-token" content=" {{ csrf_token() }}"/>
+                                <a class="btn btn-danger btn-sm" onclick="handleDeleteProduct( {{$produto->id}} ,'{{ route('produto.delete') }}')">Excluir</a>
                             </td>
                         </tr>
                     @endforeach
