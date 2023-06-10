@@ -14,8 +14,7 @@ class ProdutosController extends Controller
 
     public function index(Request $request)
     {
-        $produtosFiltrados = $request->pesquisa;
-        $produtos = $this->produto->where('nome', 'LIKE', "%$produtosFiltrados%")->paginate(10);
+        $produtos = $this-> produto->getFilteredProducts($request);
     
         return view('pages.produtos.paginacao', compact('produtos'));
     }

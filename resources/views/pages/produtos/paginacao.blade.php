@@ -23,18 +23,23 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($produtos as $produto )
-                <tr>
-                    <td>{{ $produto->nome }}</td>
-                    <td>R$ {{ number_format($produto->valor, 2, ',', '.') }}</td>
-                    <td>
-                        <a href="" class="btn btn-light btn-sm">Editar</a>
-                        <a class="btn btn-danger btn-sm" onclick="excluirProduto({{ $produto->id }})">Excluir</a>
-                    </td>
-                  </tr>
-                  @endforeach
-                  
-              </tbody>
+                @if (count($produtos) > 0)
+                    @foreach ($produtos as $produto)
+                        <tr>
+                            <td>{{ $produto->nome }}</td>
+                            <td>R$ {{ number_format($produto->valor, 2, ',', '.') }}</td>
+                            <td>
+                                <a href="" class="btn btn-light btn-sm">Editar</a>
+                                <a class="btn btn-danger btn-sm" onclick="excluirProduto({{ $produto->id }})">Excluir</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td colspan="3">Nenhum produto encontrado ...</td>
+                    </tr>
+                @endif
+            </tbody>
             </table>
         </div>
         <div class="pagination">
