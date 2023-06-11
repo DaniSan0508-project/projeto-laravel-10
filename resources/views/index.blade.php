@@ -106,10 +106,11 @@
 
     @yield('scripts')
       <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-      <script src="js/bootstrap.bundle.min.js"></script>
+      <script ssrc="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
       <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-      <script src="js/dashboard.js"></script>
-      <script src="js/handleDeleteProduct.js"></script>
-  </body>
+      <script ssrc="{{ asset('js/dashboard.js') }}"></script>
+      <script src="{{ asset('js/handleDeleteProduct.js') }}"></script>
+      {{-- InputMask --}}
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 </html>

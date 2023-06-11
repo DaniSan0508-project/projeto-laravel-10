@@ -10,7 +10,7 @@
             <input type="text" class="form-control" name="pesquisa" placeholder="Digite o termo de pesquisa">
             <div class="input-group-append">
                 <button class="btn btn-primary" type="submit">Pesquisar</button>
-                <a type="button" href="" class="btn btn-success">Incluir produto</a>
+                <a type="button" href="{{ route('produto.create') }}" class="btn btn-success">Incluir produto</a>
             </div>
         </div>
         <div class="table-responsive mt-4">

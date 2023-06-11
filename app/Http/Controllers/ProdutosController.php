@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FormRequestProduto;
 use App\Models\Produto;
+use App\Models\SharedComponents;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 
@@ -30,5 +32,16 @@ class ProdutosController extends Controller
         $produto->delete();
         return response()->json(["success" => true, 'message' => 'Produto deletado.']);
         
+    }
+
+    public function create(FormRequestProduto $request){
+        $sharedComponents = new SharedComponents();
+        if($request->method() == "POST"){
+           $data = $request->all();
+           $data['valor'] = $sharedComponents->formatacaoMascaraDinheiroDecimal($data['valor']);
+            $this->produto->create($data);
+            return redirect()->route('produto.index');
+        }
+        return view('pages.produtos.create');
     }
 }
