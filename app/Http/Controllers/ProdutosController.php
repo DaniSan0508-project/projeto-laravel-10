@@ -44,4 +44,17 @@ class ProdutosController extends Controller
         }
         return view('pages.produtos.create');
     }
+
+    public function update(FormRequestProduto $request, $id){
+        if($request->method() == "PUT"){
+                $sharedComponents = new SharedComponents();
+                $data = $request->only(['nome','valor']);
+                $data['valor'] = $sharedComponents->formatacaoMascaraDinheiroDecimal($data['valor']);
+                $product = $this->produto->find($id);
+                $product->update($data);
+             return redirect()->route('produto.index');
+         }
+         $selectedProduct = $this->produto->where('id','=',$id)->first();
+         return view('pages.produtos.update', compact('selectedProduct'));
+    }
 }
