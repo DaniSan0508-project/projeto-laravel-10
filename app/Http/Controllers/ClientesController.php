@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FormRequestCliente;
 use App\Http\Requests\FormRequestProduto;
 use App\Models\Cliente;
 use App\Models\SharedComponents;
@@ -24,36 +25,32 @@ class ClientesController extends Controller
     public function delete(Request $request)
     {
         $id = $request->id;
-        $produto = $this->produto->find($id);
-        if(!$produto){
-            return response()->json(['success' => false, 'message' => 'Produto não encontrado.'], 404);
+        $cliente = $this->cliente->find($id);
+        if(!$cliente){
+            return response()->json(['success' => false, 'message' => 'Cliente não encontrado.'], 404);
         }
-        $produto->delete();
-        return response()->json(["success" => true, 'message' => 'Produto deletado.']);
+        $cliente->delete();
+        return response()->json(["success" => true, 'message' => 'Cliente deletado.']);
         
     }
 
-    public function create(FormRequestProduto $request){
-        $sharedComponents = new SharedComponents();
+    public function create(FormRequestCliente $request){
         if($request->method() == "POST"){
-           $data = $request->all();
-           $data['valor'] = $sharedComponents->formatacaoMascaraDinheiroDecimal($data['valor']);
-            $this->produto->create($data);
-            return redirect()->route('produto.index');
+           $data = $request->only(['nome','email','endereco','logradouro','cep','bairro']);
+           $this->cliente->create($data);
+            return redirect()->route('cliente.index');
         }
-        return view('pages.produtos.create');
+        return view('pages.clientes.create');
     }
 
-    public function update(FormRequestProduto $request, $id){
+    public function update(FormRequestCliente $request, $id){
         if($request->method() == "PUT"){
-                $sharedComponents = new SharedComponents();
-                $data = $request->only(['nome','valor']);
-                $data['valor'] = $sharedComponents->formatacaoMascaraDinheiroDecimal($data['valor']);
-                $product = $this->produto->find($id);
-                $product->update($data);
-             return redirect()->route('produto.index');
+            $data = $request->only(['nome','email','endereco','logradouro','cep','bairro']);
+            $selected = $this->cliente->find($id);
+            $selected->update($data);
+             return redirect()->route('cliente.index');
          }
-         $selectedProduct = $this->produto->where('id','=',$id)->first();
-         return view('pages.produtos.update', compact('selectedProduct'));
+         $selectedClient = $this->cliente->where('id','=',$id)->first();
+         return view('pages.clientes.update', compact('selectedClient'));
     }
 }

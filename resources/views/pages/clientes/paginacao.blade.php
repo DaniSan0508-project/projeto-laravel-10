@@ -10,7 +10,7 @@
             <input type="text" class="form-control" name="pesquisa" placeholder="Digite o termo de pesquisa">
             <div class="input-group-append">
                 <button class="btn btn-primary" type="submit">Pesquisar</button>
-                <a type="button" href="{{ route('cliente.create') }}" class="btn btn-success">Incluir produto</a>
+                <a type="button" href="{{ route('cliente.create') }}" class="btn btn-success">Incluir cliente</a>
             </div>
         </div>
         <div class="table-responsive mt-4">
@@ -28,7 +28,7 @@
               </thead>
               <tbody>
                 @if (count($clientes) > 0)
-                    @foreach ($produtos as $cliente)
+                    @foreach ($clientes as $cliente)
                         <tr>
                             <td>{{ $cliente->nome }}</td>
                             <td>{{ $cliente->email }}</td>
@@ -37,9 +37,9 @@
                             <td>{{ $cliente->cep }}</td>
                             <td>{{ $cliente->bairro }}</td>
                             <td>
-                                <a href="{{ route('cliente.update', $produto->id) }}" class="btn btn-light btn-sm">Editar</a>
+                                <a href="{{ route('cliente.update', $cliente->id) }}" class="btn btn-light btn-sm">Editar</a>
                                 <meta name="csrf-token" content=" {{ csrf_token() }}"/>
-                                <a class="btn btn-danger btn-sm" onclick="handleDeleteProduct( {{$cliente->id}} ,'{{ route('produto.delete') }}')">Excluir</a>
+                                <a class="btn btn-danger btn-sm" onclick="handleDeleteProduct( {{$cliente->id}} ,'{{ route('cliente.delete') }}')">Excluir</a>
                             </td>
                         </tr>
                     @endforeach
