@@ -8,7 +8,7 @@
               </a>
           </li>
           <li class="nav-item">
-              <a class="nav-link {{ request()->is('vendas') ? 'active' : '' }}" href="/vendas">
+              <a class="nav-link {{ request()->is('vendas*') ? 'active' : '' }}" href="{{ route('venda.index') }}">
                   <span data-feather="file" class="align-text-bottom"></span>
                   Vendas
               </a>

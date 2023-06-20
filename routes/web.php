@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ProdutosController;
+use App\Http\Controllers\VendaController;
+use App\Http\Controllers\VendasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,4 +41,12 @@ Route::prefix('clientes')->group(function (){
     //Atualizar Cliente
     Route::get('/updateClient/{id}', [ClientesController::class, 'update'])->name('cliente.update');
     Route::put('/updateClient/{id}', [ClientesController::class, 'update'])->name('cliente.update');
+});
+
+Route::prefix('vendas')->group(function (){
+    Route::get('/', [VendasController::class, 'index'])->name('venda.index');
+    Route::delete('/delete', [VendasController::class, 'delete'])->name('venda.delete');
+    //Criar Cliente
+    Route::get('/create', [VendasController::class, 'create'])->name('venda.create');
+    Route::post('/create', [VendasController::class, 'create'])->name('venda.create');
 });
